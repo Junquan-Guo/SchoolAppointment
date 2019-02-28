@@ -1,0 +1,298 @@
+﻿.search_style {
+    margin-bottom: 20px;
+    border-left: 5px solid #009688;
+    border-radius: 0 2px 2px 0;
+    padding: 15px;
+    background-color: #f2f2f2;
+}
+
+.search_style .search_content li {
+    margin-right: 20px;
+    float: left;
+    line-height: 30px;
+    list-style: none;
+}
+
+.search_style .search_content li .btn_search {
+    border-style: none;
+    border-color: inherit;
+    border-width: 0px;
+    background-position: 0% 0%;
+    height: 32px;
+    background-repeat: repeat-x !important;
+    line-height: 32px;
+    width: 60px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-image: linear-gradient(to bottom,#3b98d6 0,#197ec1 100%)!important;
+    background-color: #2a8bcc !important;
+    background-attachment: scroll !important;
+}
+
+.text_add {
+    height: 32px;
+    line-height: 32px;
+    width: 20em;
+}
+
+.laydate-icon {
+    margin-left: 10px;
+}
+
+.search_style .search_content li .btn_search i {
+    padding-right: 5px;
+}
+
+.l_f {
+    float: left;
+}
+
+label, .lbl {
+    vertical-align: middle;
+}
+
+.r_f {
+    float: right;
+}
+.border span {
+    display: inline-block;
+    margin-right: 5px;
+}
+label {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    border-radius: 0!important;
+    color: #858585;
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    padding: 5px 4px;
+    margin-left: 10px;
+    line-height: 1.2;
+    font-size: 14px;
+    font-family: inherit;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    -webkit-transition-duration: .1s;
+    transition-duration: .1s;
+}
+
+.laydate-icon {
+    border: 1px solid #ddd;
+    background-image: url(../../images/icon.png);
+}
+
+.laydate-icon, .laydate-icon-default, .laydate-icon-danlan, .laydate-icon-dahong, .laydate-icon-molv {
+    height: 30px;
+    line-height: 30px;
+    padding-right: 20px;
+    border: 1px solid #C6C6C6;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-color: #fff;
+    outline: 0;
+}
+
+.border {
+    border: 1px solid #ddd;
+    padding: 5px;
+    height: 50px;
+    line-height: 36px;
+    margin-bottom: 20px;
+}
+
+.dataTables_wrapper label {
+    display: inline-block;
+    font-size: 13px;
+}
+
+.dataTables_length label {
+    font-weight: normal;
+}
+
+label, .lbl {
+    vertical-align: middle;
+}
+
+.dataTables_wrapper .row:first-child + .dataTable {
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    font-family: "新宋体";
+}
+
+.dataTable {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+th, td, .table-bordered {
+    border-radius: 0!important;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: transparent;
+}
+
+.table.table-bordered thead tr th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.dataTable th[class*=sort]:after {
+    content: "\f0dc";
+    display: inline-block;
+    color: #555;
+    font-family: FontAwesome;
+    font-size: 13px;
+    font-weight: normal;
+    float: right;
+    margin-right: 4px;
+    position: relative;
+}
+
+.dataTable th[class*=sort] {
+    cursor: pointer;
+}
+
+.table thead tr th {
+    border-color: #DDD;
+    font-weight: bold;
+}
+
+.table-bordered > thead > tr > th {
+    border-bottom-width: 1px;
+}
+
+.table.table-bordered tbody tr td {
+    word-wrap: break-word;
+    word-break: break-all;
+    vertical-align: middle;
+    font-family: "新宋体";
+    text-align: center;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: #f9f9f9;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+td a .btn {
+    padding: 3px 10px;
+}
+
+th {
+    text-align: center;
+}
+
+.news_list tbody tr:not(:first-child) td:nth-child(6) {
+    text-align: left;
+    text-indent: 2em;
+    padding: 10px;
+}
+
+.news_list tbody tr:not(:first-child) td:not(:nth-child(6)) {
+    text-align: center;
+}
+
+.news_list tbody tr:hover {
+    background: #f2f2f2;
+}
+
+.links_edit, .links_edit {
+    margin: 2px 5px;
+}
+
+.news_list tbody tr:first-child th {
+    background: #f3f2f0;
+}
+    
+
+.bubufxPagerCss table {
+    text-align: center;
+    margin:0.5em auto;
+    vertical-align:central;
+}
+.bubufxPagerCss table td {
+    border: 0px;
+    padding: 5px;
+    font-size:1.5em;
+}
+
+.bubufxPagerCss a, .bubufxPagerCss span {
+    font-size:1em;
+    font-weight: 200;
+    width:4em;
+    height:3em;
+    line-height: 3em;
+    text-align: center;
+    border-radius:4px;
+    border:2px solid #17a2b8;
+}
+.bubufxPagerCss a {
+    color: #17a2b8;
+    background-color:#f2f2f2;
+}
+
+.bubufxPagerCss span,.bubufxPagerCss a:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; /*以慢速开始和结束的过渡*/
+}
+
+
+.btn-outline-success {
+    color: #28a745;
+    background-color: transparent;
+    background-image: none;
+    border-color: #28a745;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; /*以慢速开始和结束的过渡*/
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.btn-outline-info {
+    color: #17a2b8;
+    background-color: transparent;
+    background-image: none;
+    border-color: #17a2b8;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; /*以慢速开始和结束的过渡*/
+}
+
+.btn-outline-info:hover {
+    color: #fff;
+    background-color: #17a2b8;
+}
+input:focus {
+    border:1px solid #ff6a00;
+}

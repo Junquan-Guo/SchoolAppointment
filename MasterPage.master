@@ -1,0 +1,752 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /><%--适应手机，不允许缩放--%>
+    <title>校约健</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="shortcut icon" href="images/favicon.ico" /><%--icon_LOGO--%>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" media="screen" /><%--screen:计算机屏幕--%>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" /><%--公共样式--%>
+    <link rel="stylesheet" type="text/css" href="css/tk.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/dase.css" media="screen" /><%--子页样式--%>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var xmlhttp;
+        function Validation() {
+            if (window.XMLHttpRequest) {// IE7+、 Firefox、 Chrome、 Opera、Safari浏览器
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {//IE6、E5浏览器
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            var username = document.getElementById("txtUsername");
+            xmlhttp.open("GET", "CheckUserName1.aspx?UserName=" + username.value, true);
+            xmlhttp.onreadystatechange = OnMessageBack;
+            xmlhttp.send();
+        }
+
+        function OnMessageBack() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("divMessage").innerHTML = xmlhttp.responseText;
+            }
+        }
+    </script>
+
+</head>
+
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20" runat="server">
+    <%--滚动监听--%>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>" SelectCommand="SELECT * FROM [users]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>" SelectCommand="SELECT [typeid], [typename], [typeurl] FROM [types]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>" SelectCommand="SELECT DISTINCT * FROM [label] WHERE ([labelid] = @labelid)">
+        <SelectParameters>
+            <asp:Parameter DefaultValue="8" Name="labelid" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <div id="form1" runat="server">
+        <form id="Div1" runat="server">
+            <div id="container">
+                <!--header头部-->
+                <header class="clearfix" id="header-sec">
+                    <nav class="navbar navbar-default navbar-fixed-top" role="navigation"><%--导航，role增加可访问性--%>
+                        <div class="top-line">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-md-8 col-sm-9 topbar-left">
+                                        <ul class="info-list">
+                                            <li class="tb-commenting">
+                                                <a href="javascript:void(0);" id="myModal"><i class="fa fa-commenting"></i><span>在线反馈</span></a>
+                                            </li>
+                                            <li class="tb-envelope">
+                                                <a href="javascript:void(0);" id="myModal2"><i class="fa fa-envelope"></i><span>邮箱咨询</span></a>
+                                            </li>
+                                            <li class="tb-qq">
+                                                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="right" title="qq-1630312"><i class="fa fa-qq"></i><span>qq咨询</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <%--反馈--%>
+                                    <div id="qutton_comment" class="qutton qutton1">
+
+                                        <div class="commentDialog qutton_dialog">
+                                            <div class="qutton_header">
+                                                <h3>在线反馈</h3>
+                                                <div class="u-times">
+                                                    <asp:HyperLink ID="HyperLink10" NavigateUrl="javascript:void(0)" runat="server"><i class="fa fa-times"></i></asp:HyperLink>
+                                                </div>
+                                            </div>
+                                            <asp:TextBox ID="feedback_1" CssClass="commentInput" TextMode="MultiLine" placeholder="你的反馈..." runat="server"></asp:TextBox>
+                                            <asp:Button ID="feedback_btn1" CssClass="button_basic_submit_comment" runat="server" Text="发送" OnClick="feedback_btn1_Click" />
+                                        </div>
+
+                                        <div class="commentDialog qutton_dialog2">
+                                            <div class="qutton_header">
+                                                <h3>邮箱反馈</h3>
+                                                <div class="u-times">
+                                                    <asp:HyperLink ID="HyperLink11" NavigateUrl="javascript:void(0)" runat="server"><i class="fa fa-times"></i></asp:HyperLink>
+                                                </div>
+                                            </div>
+                                            <asp:TextBox ID="feedback_email" CssClass="commentText" runat="server" placeholder="请输入邮箱..." Text="1630312@qq.com"></asp:TextBox>
+                                            <asp:TextBox ID="feedback_2" CssClass="commentInput" TextMode="MultiLine" placeholder="你的反馈..." runat="server"></asp:TextBox>
+                                            <asp:Button ID="feedback_btn2" CssClass="button_basic_submit_comment2" runat="server" Text="发送" OnClick="feedback_btn2_Click" />
+                                        </div>
+                                    </div><%--END_反馈--%>
+
+                                    <div class="col-md-4 col-sm-3 topbar-right">
+                                        <ul class="social-icons">
+                                            <li><a href="javascript:;" data-toggle="tooltip" data-placement="left" title="购物车功能暂未实现"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="dynamic.aspx?typeid=5" data-toggle="tooltip" data-placement="left" title="发布动态?"><i class="fa fa-camera"></i></a></li>
+                                            <li><a href="javascript:;" data-toggle="tooltip" data-placement="left" title="全屏"><i class="fa fa-television" onclick="toggleFullScreen(document.body)"></i></a></li>
+                                            <li><a href="javascript:;" data-toggle="tooltip" data-placement="left" title="设置功能暂未实现"><i class="fa fa-cog"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="navbar-header">
+                                <a class="navbar-toggle collapsed mmenu-btn" href="#mmenu">
+                                    <span class="sr-only">切换导航</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </a>
+                                <a class="navbar-brand" href="javascript:;">
+                                    <img src="images/logo.png" alt="" class="logo" />
+                                </a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                                    SelectCommand="SELECT g.[growname],g.[growid],c.[classname],c.[classid],t.[typeid],t.[typeurl]
+                                FROM [dbo].[grows] g
+                                INNER JOIN [dbo].[class] c
+                                    ON g.[classid] = c.[classid]
+                                INNER JOIN [dbo].[types] t
+                                    ON c.[typeid] = t.[typeid]and g.[growname]='全部' 
+                                WHERE (t.[typeid] = 2)"></asp:SqlDataSource>
+                                <ul class="nav navbar-nav navbar-left" id="navigation">
+                                    <li class="Lev1">
+                                        <a href="Default.aspx" class='menu1 active'>网站首页 </a>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=1" class="menu1 active">运动知识库<i class="fa fa-caret-down"></i></a>
+                                        <ul class="drop-down sub-menu2">
+                                            <asp:ListView ID="ListView12" runat="server" DataSourceID="SqlDataSource4">
+                                                <ItemTemplate>
+                                                    <li class="Lev2">
+                                                        <asp:HyperLink ID="HyperLink9" CssClass="menu2" NavigateUrl='<%# "~/"+Eval("typeurl")+".aspx?typeid="+Eval("typeid")+"&classid="+Eval("classid")+"&growid="+Eval("growid")%>' runat="server" Text='<%#Eval("classname") %>'>'></asp:HyperLink>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:ListView>
+                                        </ul>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="video.aspx?typeid=3" class="menu1 active">视频课程 </a>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="chitchat.aspx?typeid=4" class="menu1 active">聊天</a>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="dynamic.aspx?typeid=5" class="menu1 active">动态圈</a>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="assist.aspx?typeid=6" class="menu1 active">辅助</a>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="discover.aspx?typeid=7" class="menu1 active">发现</a>
+                                    </li>
+
+                                    <li class="Lev1">
+                                        <a href="collect.aspx?typeid=8" class="menu1 active">我的收藏</a>
+                                    </li>
+
+                                    <li class="search nav-search">
+                                        <a href="javascript:;" class="open-search"><i class="fa fa-search"></i></a>
+                                        <div class="form-search" id="searchform">
+                                            <asp:DropDownList ID="DropDownList1" runat="server" Height="38px" Width="70px">
+                                                <asp:ListItem Value="all">文章</asp:ListItem>
+                                                <asp:ListItem Value="content">视频</asp:ListItem>
+                                                <asp:ListItem Value="filename">找人</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <input type="hidden" name="kwtype" value="0" /><%--隐藏的输入字段--%>
+                                            <asp:TextBox ID="txtsearch" runat="server" name="q" CssClass="search-input" placeholder="输入关键字"></asp:TextBox>
+                                            <asp:ImageButton ID="btnsearch" CssClass="btnsearch" ImageUrl="~/images/icon-lense.png" runat="server" OnClick="btnsearch_Click" />
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right" id="Ul1">
+                                    <li><a href="javascript:;" data-toggle="tooltip" data-placement="bottom" title="等待更新"><i class="fa fa-bell"></i>
+                                        <span class="info-label badge badge-info">5</span></a>
+                                    </li>
+                                    <li><a href="javascript:;" data-toggle="tooltip" data-placement="bottom" title="等待更新"><i class="fa fa-comments"></i>
+                                        <span class="info-label badge badge-info">5</span></a></li>
+                                    <li class="user">
+                                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank">
+                                            <asp:Image ID="ImgUser" runat="server" ImageUrl="~/images/user.png" Height="40px" Width="40px" />
+                                        </asp:HyperLink>
+                                        <asp:Label ID="Userid" CssClass="layui-nav-more" runat="server" Text=""></asp:Label>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+                <!--END_header头部-->
+
+                <!--main-->
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <!-- END_main -->
+
+                <!-- footer -->
+                <footer class="footer slate_gray">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-9">
+                                <asp:DataList ID="DataList1" runat="server" DataKeyField="labelid" DataSourceID="SqlDataSource3" RepeatDirection="Horizontal">
+                                    <ItemTemplate>
+                                        <p class="copyright">
+                                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("introduce") %>'></asp:Label>
+                                        </p>
+                                        <p class="copyright">
+                                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("introduce2") %>'></asp:Label>
+                                        </p>
+                                    </ItemTemplate>
+                                </asp:DataList>
+                            </div>
+                            <div class="col-md-4 col-sm-3">
+                                <div class="social navbar-right">
+                                    <p class="social__text">了解更多：</p>
+                                    <ul class="social__list">
+                                        <li class="social__item">
+                                            <a class="facebook" href="https://weibo.com/" target="_blank">
+                                                <i class="fa fa-weibo"></i>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a class="twitter" href="#">
+                                                <i class="fa fa-weixin"></i>
+                                                <div class="ewm">
+                                                    <img src="images/weixin.jpg" />
+                                                    <h6>微信公众号</h6>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="social__item">
+                                            <a class="gplus" href="#">
+                                                <i class="fa fa-whatsapp"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer><!-- END_footer底部 -->
+
+                <!--弹出提示框 -->
+                <div id="successMsg" class="successMsg">
+                    <div class="succeed"><span class="glyphicon glyphicon-ok-sign"></span><span class="tisi">操作成功!!</span></div>
+                    <div class="loser"><span class="glyphicon glyphicon-remove-sign"></span><span class="tisi">操作失败!!</span></div>
+                    <div class="warning"><span class="glyphicon glyphicon-info-sign"></span><span class="tisi">存在问题!!</span></div>
+                    <div class="presentation"><span class="glyphicon glyphicon-question-sign"></span><span class="tisi">提示问题!!</span></div>
+                </div>
+                <!--END-弹出提示框 -->
+
+                <!--右侧悬浮项 -->
+                <div class="suspension">
+                    <div class="suspension-box">
+                        <a href="javascript:void(0);" class="a a-list"></a>
+                        <div class="search">
+                            <input class="search_box" type="checkbox" id="search_box" />
+                            <label class="icon-search" for="search_box">
+                                <a class="a a-hunt"></a>
+                            </label>
+                            <div class="search_form">
+                                <ul class="border1">
+                                    <li><a href="javascript:void(0);" class="style1">文章</a></li>
+                                    <li><a href="javascript:void(0);">视频</a></li>
+                                    <li><a href="javascript:void(0);">找人</a></li>
+                                </ul>
+                                <div>
+                                    <input type="text" name="Search" placeholder="请输入文章名称..." id="searchPlaceholder" />
+                                    <input type="submit" value=" " class="" />
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:void(0);" class="a a-top"></a>
+                    </div>
+                </div>
+                <div id="cd-main-nav" class="cd-main-nav">
+                    <ul class="navbar-main-nav">
+                        <asp:DataList ID="DataList2" runat="server" DataKeyField="typeid" DataSourceID="SqlDataSource2" RepeatColumns="2" RepeatDirection="Horizontal">
+                            <ItemTemplate>
+                                <li class="nav_lev1">
+                                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# "~/"+Eval("typeurl") +".aspx?typeid="+Eval("typeid")%>' Text='<%# Eval("typename") %>'></asp:HyperLink>
+                                </li>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </ul>
+                    <div class="cd-main-times">
+                        <div class="cd-times">
+                            <a href="javascript:void(0);" class="a-list"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                </div><!--END_右侧悬浮项 -->
+
+
+                <script type="text/javascript"><%--导航切换--%>
+    var $c = function (array) { var nArray = []; for (var i = 0; i < array.length; i++) nArray.push(array[i]); return nArray; };
+    Array.prototype.each = function (func) {
+        for (var i = 0, l = this.length; i < l; i++) { func(this[i], i); };
+    };
+    document.getElementsByClassName = function (cn) {
+        var hasClass = function (w, Name) {
+            var hasClass = false;
+            w.className.split(' ').each(function (s) {
+                if (s == Name) hasClass = true;
+            });
+            return hasClass;
+        };
+        var elems = document.getElementsByTagName("*") || document.all;
+        var elemList = [];
+        $c(elems).each(function (e) {
+            if (hasClass(e, cn)) { elemList.push(e); }
+        })
+        return $c(elemList);
+    };
+    function change_bg(obj) {
+        var a = document.getElementsByClassName("navbar-collapse")[0].getElementsByTagName("a");
+        for (var i = 0; i < a.length; i++) { a[i].className = ""; }
+        obj.className = "active";
+    }
+                </script>
+
+
+                <script type="text/javascript" src="js/jquery.themepunch.revolution.min.js"></script>
+                <script type="text/javascript" src="js/script.js"></script>
+                <!--移动端导航-->
+                <nav id="mmenu" class="noDis">
+                    <div class="mmDiv">
+                        <div class="MMhead">
+                            <a href="#mm-0" class="closemenu noblock">X</a>
+                            <a href="javascript:;" target="_blank" class="noblock"><i class="fa fa-envelope"></i></a>
+                            <a href="javascript:;" target="_blank" class="noblock"><i class="fa fa-camera"></i></a>
+                            <a href="javascript:;" target="_blank" class="noblock"><span class="glyphicon glyphicon-user"></span></a>
+                            <a href="javascript:;" target="_blank" class="noblock"><i class="fa fa-cog"></i></a>
+                        </div>
+                        <div class="mm-search">
+                            <div class="mm-search-form">
+                                <input type="hidden" name="kwtype" value="0" />
+                                <input type="text" autocomplete="off" value="" name="q" class="side-mm-keyword" placeholder="输入关键字..." />
+                            </div>
+                        </div>
+                        <ul>
+                            <li class="m-Lev1 m-nav_0">
+                                <a href="Default.aspx">首页</a>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4">
+                                <a href="news.aspx?typeid=2&classid=1&growid=1" class="m-menu1">运动知识库</a>
+                                <ul class="m-submenu">
+                                    <li class="Lev2">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=1" class="menu2">动作库</a>
+                                    </li>
+
+                                    <li class="Lev2">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=11" class="menu2">瑜伽教程</a>
+                                    </li>
+
+                                    <li class="Lev2">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=14" class="menu2">体育训练</a>
+                                    </li>
+
+                                    <li class="Lev2">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=22" class="menu2">减肥瘦身</a>
+                                    </li>
+
+                                    <li class="Lev2">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=27" class="menu2">有氧运动</a>
+                                    </li>
+
+                                    <li class="Lev2">
+                                        <a href="news.aspx?typeid=2&classid=1&growid=34" class="menu2">健身知识</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4">
+                                <a href="video.aspx?typeid=3" class="m-menu1">视频教学</a>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4">
+                                <a href="chitchat.aspxtypeid=4" class="m-menu1">聊天</a>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4">
+                                <a href="dynamic.aspxtypeid=5" class="m-menu1">动态圈</a>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4">
+                                <a href="assist.aspxtypeid=6" class="m-menu1">辅助</a>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4">
+                                <a href="discover.aspxtypeid=7" class="m-menu1">发现</a>
+                            </li>
+
+                            <li class="m-Lev1 m-nav_4typeid=8">
+                                <a href="collect.aspx" class="m-menu1">我的收藏</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+                <!--END_移动端导航-->
+                <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
+                <script type="text/javascript" src="js/jquery.mmenu.all.min.js"></script>
+                <script type="text/javascript">
+                    jQuery(document).ready(function ($) {
+                        var mmenu = $('nav#mmenu').mmenu({
+                            slidingSubmenus: true,
+                            classes: 'mm-white', //mm-fullscreen mm-light
+                            extensions: ["theme-white"],
+                            offCanvas: {
+                                position: "right", //left, top, right, bottom
+                                zposition: "front" //back, front,next
+                                //modal		: true
+                            },
+                            searchfield: false,
+                            counters: false,
+                            //navbars		: {
+                            //content : [ "prev", "title", "next" ]
+                            //},
+                            navbar: {
+                                title: "网站导航"
+                            },
+                            header: {
+                                add: true,
+                                update: true,
+                                title: "网站导航"
+                            }
+                        });
+                        $(".closemenu").click(function () {
+                            var mmenuAPI = $("#mmenu").data("mmenu");
+                            mmenuAPI.close();
+                        });
+                    });
+                </script>
+
+                <%--未登录状态--%>
+                <div class="pop-up">
+                    <%--登录--%>
+                    <div class="login_box visible widget-box" id="login-box">
+                        <div class="m-header">
+                            <div class="u_headline">
+                                <h3>登录/LOGIN</h3>
+                            </div>
+                            <div class="u-times">
+                                <asp:HyperLink ID="HyperLink7" NavigateUrl="javascript:void(0)" runat="server"><i class="fa fa-times"></i></asp:HyperLink>
+                            </div>
+                        </div>
+                        <div class="m-content">
+
+                            <div class="login_text " data-validate="请输入用户名">
+                                <asp:TextBox ID="LgUsername" CssClass="input_text" runat="server" placeholder="请输入用户名" MaxLength="8"></asp:TextBox>
+                                <asp:Label ID="Label3" CssClass="focus-input" runat="server" Text="Label"><i class="fa fa-user"></i></asp:Label>
+                                <asp:HyperLink ID="HyperLink5" CssClass="clear-input" runat="server"><i class="fa fa-times-circle"></i><i class="fa fa-times-circle"></i></asp:HyperLink>
+                            </div>
+                            <div class="login_text" data-validate="请输入密码">
+                                <asp:TextBox ID="LgUserpass" CssClass="input_text LgUserpass" runat="server" placeholder="请输入密码" TextMode="Password" MaxLength="18"></asp:TextBox>
+                                <asp:Label ID="Label4" CssClass="focus-input" runat="server" Text="Label"><i class="fa fa-unlock-alt"></i></asp:Label>
+                                <asp:HyperLink ID="HyperLink4" CssClass="demo_fa" runat="server"><i class="fa fa-eye"></i><i class="fa fa-eye-slash "></i></asp:HyperLink>
+                            </div>
+                            <div class="login_text" data-validate="请输入右边验证码">
+                                <asp:TextBox ID="TextBox1" CssClass="input_text input_yanzheng" runat="server" placeholder="请输入右边验证码"></asp:TextBox>
+                                <asp:Image ID="YzUrl" ImageUrl="./GenerateCheckCode.aspx" ToolTip="刷新" CssClass="yanzhengma" runat="server" />
+                                <div id="shuaxin" data-toggle="tooltip" data-placement="right" title="看清楚，换一张" class="glyphicon glyphicon-repeat"></div>
+                                <asp:Label ID="Label5" CssClass="focus-input" runat="server" Text="Label"><i class="fa fa-key"></i></asp:Label>
+                            </div>
+                            <div class="login_text">
+                                <div class="text-left">
+                                    <asp:CheckBox ID="CheckBox1" CssClass="checkbox" runat="server" />
+                                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="javascript:">自动登录</asp:HyperLink>
+                                </div>
+                                <div class="text-right toolbar">
+                                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="javascript:" data-target="#forgot-box">忘记密码？</asp:HyperLink>
+                                </div>
+                            </div>
+                            <div>
+                                <a class="logon-center" id="login">登录</a>
+                            </div>
+                            <div class="register-center">
+                                <div>
+                                    <asp:Button ID="LgUserreset" CssClass="reset-left" runat="server" Text="重置" OnClick="btncancle_Click" />
+                                </div>
+                                <div class="register-right toolbar">
+                                    <a href="javascript:" data-target="#signup-box">前往注册</a>
+                                </div>
+                            </div>
+                            <div class="social-or-login text-center ">
+                                <span>其他登录方式</span>
+                            </div>
+                            <div class="thirdly">
+                                <a class="social-item bg1" href="#">
+                                    <i class="fa fa-weixin"></i>
+                                </a>
+                                <a class="social-item bg2" href="#">
+                                    <i class="fa fa-weibo"></i>
+                                </a>
+                                <a class="social-item bg3" href="#">
+                                    <i class="fa fa-qq"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <%--END-登录--%>
+
+                    <%--找回密码--%>
+                    <div class="login_box widget-box" id="forgot-box">
+                        <div class="m-header1">
+                            <div class="u_headline">
+                                <h3>找回密码/FIND</h3>
+
+                            </div>
+                            <div class="u-times">
+                                <a href="#"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="m-content">
+                            <div class="login_find">
+                                <p>请输入要重置密码的手机号码</p>
+                            </div>
+                            <div class="login_text " data-validate="手机号码">
+                                <input class="input_text" type="text" name="phone" placeholder="手机号码" autocomplete="off" />
+                                <span class="focus-input"><i class="fa fa-user"></i></span>
+                            </div>
+                            <div class="login_text" data-validate="请输入收到的验证码">
+                                <input class="input_text" type="text" name="code" placeholder="请输入收到的验证码" />
+                                <span class="focus-input"><i class="fa fa-key"></i></span>
+                            </div>
+                            <div class="logon-center toolbar">
+                                <a href="javascript " data-target="#reset-box">下一步</a>
+                            </div>
+                            <div class="register-center">
+                                <div class="reset-left">
+                                    <a href="javascript:">重置</a>
+                                </div>
+                                <div class="register-right toolbar">
+                                    <a href="javascript:" data-target="#login-box">返回登录</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--END-找回密码--%>
+
+                    <%--重置密码--%>
+                    <div class="login_box widget-box" id="reset-box">
+                        <div class="m-header1">
+                            <div class="u_headline">
+                                <h3>重置密码/RESET</h3>
+
+                            </div>
+                            <div class="u-times">
+                                <a href="#"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                        <div class="m-content">
+                            <div class="login_find">
+                                <p>请输入新的密码</p>
+                            </div>
+                            <div class="login_text" data-validate="6-16位密码，区分大小写">
+                                <input class="input_text" type="password" name="pass" placeholder="6-16位密码，区分大小写" />
+                                <span class="focus-input"><i class="fa fa-unlock-alt"></i></span>
+                            </div>
+                            <div class="login_text" data-validate="确认密码">
+                                <input class="input_text" type="password" name="pass" placeholder="确认密码" />
+                                <span class="focus-input"><i class="fa fa-unlock"></i></span>
+                            </div>
+                            <div class="logon-center">
+                                <a href="javascript:">完成</a>
+                            </div>
+                            <div class="register-center">
+                                <div class="reset-left">
+                                    <a href="javascript:">重置</a>
+                                </div>
+                                <div class="register-right toolbar">
+                                    <a href="javascript:" data-target="#login-box">返回登录</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--END-重置密码--%>
+
+                    <%--注册--%>
+                    <div class="login_box widget-box" id="signup-box">
+                        <div class="m-header2">
+                            <div class="u_headline">
+                                <h3>注册/REGISTER</h3>
+                            </div>
+                            <div class="u-times">
+                                <asp:HyperLink ID="HyperLink6" NavigateUrl="javascript:void(0);" runat="server"><i class="fa fa-times"></i></asp:HyperLink>
+                            </div>
+                        </div>
+                        <div class="m-content">
+                            <div class="login_text " data-validate="给自己起个用户名吧!">
+                                <asp:TextBox ID="txtUsername" CssClass="input_text" name="username" placeholder="给自己起个用户名吧!" onblur="Validation()" MaxLength="8" runat="server"></asp:TextBox>
+                                <span class="focus-input"><i class="fa fa-user"></i></span>
+                            </div>
+
+                            <div class="login_text " data-validate="手机号码">
+                                <asp:TextBox ID="txtUserPhone" CssClass="input_text" name="userphone" placeholder="手机号码" MaxLength="11" runat="server"></asp:TextBox>
+                                <span class="focus-input"><i class="fa fa-mobile "></i></span>
+                            </div>
+
+                            <div class="login_text" data-validate="6-16位密码，区分大小写">
+                                <asp:TextBox ID="txtPassword" CssClass="input_text LgUserpass" runat="server" placeholder="6-16位密码，区分大小写" TextMode="Password" onblur="Validation()" MaxLength="16"></asp:TextBox>
+                                <asp:Label ID="Label8" CssClass="focus-input" runat="server" Text="Label"><i class="fa fa-unlock-alt"></i></asp:Label>
+                                <asp:HyperLink ID="HyperLink8" CssClass="demo_fa" runat="server"><i class="fa fa-eye"></i><i class="fa fa-eye-slash "></i></asp:HyperLink>
+                            </div>
+
+                            <div class="login_text" data-validate="确认密码">
+                                <asp:TextBox ID="txtrepassword" CssClass="input_text" runat="server" placeholder="确认密码" TextMode="Password" MaxLength="18"></asp:TextBox>
+                                <span class="focus-input"><i class="fa fa-unlock"></i></span>
+                            </div>
+
+                            <div class="login_text" data-validate="请输入右边验证码">
+                                <asp:TextBox ID="TextBox3" CssClass="input_text input_yanzheng" runat="server" placeholder="请输入右边验证码"></asp:TextBox>
+                                <asp:Image ID="YzUrl2" ImageUrl="./GenerateCheckCode.aspx" ToolTip="刷新" CssClass="yanzhengma" runat="server" />
+                                <div id="shuaxin2" data-toggle="tooltip" data-placement="right" title="看清楚，换一张" class="glyphicon glyphicon-repeat"></div>
+                                <asp:Label ID="Label1" CssClass="focus-input" runat="server" Text="Label"><i class="fa fa-key"></i></asp:Label>
+                            </div>
+
+                            <div class="login_clause">
+                                <input class="checkbox" type="checkbox" /><p>我同意<a>《校约健服务条款》</a>和<a>《校约健隐私政策》</a></p>
+                            </div>
+
+                            <div class="logon-center">
+                                <a class="logon-center" id="reg">注册</a>
+                                <%--<asp:Button ID="btnregister" runat="server" Text="注册" CssClass="logon-center" Onclick="btnregister_Click" />  --%>
+                            </div>
+
+                            <div class="register-center">
+                                <asp:Button ID="Button1" CssClass="reset-left" runat="server" Text="重置" OnClick="btncancle_Click" />
+                                <div class="register-right toolbar">
+                                    <a href="javascript:" data-target="#login-box">返回登录</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <%--END-注册--%>
+                </div>
+                <%--END-未登录状态--%>
+
+
+                <%--登录状态--%>
+                <div class="pop-up2">
+                    <div class="user_xx">
+                        <div class="user2">
+                            <asp:HyperLink ID="HyperLink12" NavigateUrl="~/user_home.aspx" runat="server">
+                                <asp:Image ID="ImgUser2" runat="server" ImageUrl="~/images/user.png" Style="border-radius: 25px;" Height="42px" Width="42px" />
+                                <cite>
+                                    <asp:Label ID="Username" runat="server" Text="未登录"></asp:Label>
+                                </cite>
+                            </asp:HyperLink>
+                        </div>
+                        <div class="tongzhi">
+                            <dl>
+                                <dt>1</dt>
+                                <dd>动态</dd>
+                            </dl>
+                            <dl>
+                                <dt>0</dt>
+                                <dd>关注</dd>
+                            </dl>
+                            <dl>
+                                <dt>0</dt>
+                                <dd>粉丝</dd>
+                            </dl>
+                        </div>
+                        <div class="xinxi">
+                            <dl>
+                                <dt>会员中心</dt>
+                                <dd>未订购></dd>
+                            </dl>
+                            <dl>
+                                <dt>等级</dt>
+                                <dd>Lv.7></dd>
+                            </dl>
+                            <dl>
+                                <dt><a href="user_update.aspx">个人信息编辑</a></dt>
+                                <dd>></dd>
+                            </dl>
+                            <dl>
+                                <dt><a href="Change_Password.aspx">修改密码</a></dt>
+                                <dd>></dd>
+                            </dl>
+                        </div>
+                        <div>
+                            <asp:Button ID="lbtnexit" runat="server" Text="注销" OnClick="lbtnexit_Click" />
+                        </div>
+                        <div class="u-times">
+                            <a href="javascript:void(0)">
+                                <img src="images/guanbi.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <%--END-登录状态--%>
+            </div>
+        </form>
+        <script type="text/javascript">//全屏
+            function toggleFullScreen(elem) {
+                if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+                    if (elem.requestFullScreen) {
+                        elem.requestFullScreen();
+                    } else if (elem.mozRequestFullScreen) {
+                        elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullScreen) {
+                        elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+                    } else if (elem.msRequestFullscreen) {
+                        elem.msRequestFullscreen();
+                    }
+                } else {
+                    if (document.cancelFullScreen) {
+                        document.cancelFullScreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitCancelFullScreen) {
+                        document.webkitCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

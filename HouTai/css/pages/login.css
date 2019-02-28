@@ -1,0 +1,80 @@
+﻿.hero-area {
+    background-image: url("../../images/pexels-photo-442574.jpg");
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-attachment: scroll; /*图片不固定*/
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; /*保持比例缩放*/
+}
+
+.hero-area {
+    height: 100vh;
+    display: flex; /*弹性布局*/
+    justify-content: center; /*垂直居中*/
+    align-items: center; /*水平居中*/
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    background: rgba(0, 0, 0, 0.66);
+    background: linear-gradient(to bottom, rgba(123, 67, 151, 0.35), rgba(33, 150, 243, 0.55)); /*渐变*/
+}
+
+.contact-h-cont {
+    width: 31.3em;
+    margin: 0 auto;
+    padding: 2em;
+    background: #fff;
+    border-bottom: 0.25em solid #2196f3;
+}
+
+.form-group {
+    color: #777;
+}
+
+.form-group input,
+.form-group select {
+    color: #777;
+    border-radius: 0;
+}
+
+.btn-danger {
+    border-color: #d43f3a;
+    background: transparent;
+    color: #d43f3a;
+    float: right;
+}
+
+/*-------------------------------------------------*/
+/* =  Responsive Part
+/*-------------------------------------------------*/
+@media (max-width: 1199px) { /*平板<=991的设备*/
+    .contact-h-cont {
+        width: 31.3em;
+    }
+}
+
+@media (max-width: 991px) { /*平板<=991的设备*/
+    .contact-h-cont {
+        width: 31.3em;
+    }
+}
+
+@media (max-width: 767px) { /*<=767的设备*/
+    .contact-h-cont {
+        width: 28em;
+    }
+}
+
+@media (max-width: 460px) { /*超小设备*/
+    .contact-h-cont {
+        width: 15em;
+        padding: 1em;
+    }
+}

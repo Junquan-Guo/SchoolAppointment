@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="Default.aspx" title="首页"  description="首页">       
+        <siteMapNode url="news.aspx" title="运动知识库"  description="" >
+            <siteMapNode url="news.aspx?classid=1" title="动作库"  description="" />
+            <siteMapNode url="news.aspx?classid=2" title="瑜伽教程"  description="" />
+            <siteMapNode url="news.aspx?classid=3" title="体育训练"  description="" />
+            <siteMapNode url="news.aspx?classid=4" title="减肥瘦身"  description="" />
+            <siteMapNode url="news.aspx?classid=5" title="有氧运动"  description="" />
+            <siteMapNode url="news.aspx?classid=6" title="健身知识"  description="" />
+        </siteMapNode>
+        <siteMapNode url="video.aspx" title="视频课程"  description="视频课程" >
+            <siteMapNode url="video_detail.aspx" title="视频详情"  description="视频详情" />
+            <siteMapNode url="video_play.aspx" title="视频播放"  description="视频播放" />
+        </siteMapNode>
+        <siteMapNode url="chitchat.aspx" title="聊天"  description="聊天" />
+        <siteMapNode url="dynamic.aspx" title="动态圈"  description="动态圈" />
+        <siteMapNode url="assist.aspx" title="辅助"  description="辅助" />
+        <siteMapNode url="discover.aspx" title="发现"  description="发现" />
+        <siteMapNode url="collect.aspx" title="我的收藏"  description="我的收藏" />
+      <siteMapNode url="user_update.aspx" title="个人信息编辑"  description="" >
+          
+      </siteMapNode>
+      <siteMapNode url="user_home.aspx" title="我的主页"  description="" >
+      </siteMapNode>
+      <siteMapNode url="Change_Password.aspx" title="修改密码"  description="" >
+      </siteMapNode>
+    </siteMapNode>
+</siteMap>

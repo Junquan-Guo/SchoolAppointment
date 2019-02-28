@@ -1,0 +1,254 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="MasterPage2.master.cs" Inherits="MasterPage2" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server"  ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>" 
+        SelectCommand="SELECT c.*,t.*
+        FROM [dbo].[class] c 
+        INNER JOIN [dbo].[types] t
+            ON c.[typeid] = t.[typeid] 
+        WHERE (c.[classid] = @classid)">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="row">
+                <asp:DataList ID="DataList2" runat="server" DataKeyField="classid" DataSourceID="SqlDataSource1">
+                    <ItemTemplate>
+                        <div class="col-md-4 col-sm-4 bcid-cat">
+                            <h3 class="agile_w3_title">
+                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("typename") %>'></asp:Label>
+                            </h3>
+                        </div>
+                        <div class="col-md-8 col-sm-8 location">
+                            <i class="fa fa-map-marker"></i>&nbsp;
+                            <span>
+                                <asp:Label ID="Label7" runat="server" Text="当前位置："></asp:Label>
+                                <ul class="breadcrumb">
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="Default.aspx" Text="首页"></asp:HyperLink></li>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# "~/"+Eval("typeurl") +".aspx?typeid=2&classid=1&growid=1"%>' Text='<%# Eval("typename") %>'></asp:HyperLink>
+                                    </li>
+                                    <li class="active">
+                                        <asp:Label ID="Label9" runat="server" Text='<%# Eval("classname") %>'></asp:Label>
+                                    </li>
+                                </ul>
+                            </span>
+                        </div>
+                    </ItemTemplate>
+                </asp:DataList>
+            </div>
+        </div>
+    </div>
+    <div class="conServer">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+            SelectCommand="SELECT * FROM [class] WHERE ([typeid] = @typeid)">
+            <SelectParameters>
+                <asp:QueryStringParameter Name="typeid" QueryStringField="typeid" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <div class="container">
+            <div class="conServerCon">
+                <ul class="conSerUl" id="myTab">
+                    <asp:ListView ID="ListView12" runat="server" DataSourceID="SqlDataSource2">
+                        <ItemTemplate>
+                            <li class="col-xs-4 col-sm-4 col-md-2">
+                                <asp:HyperLink ID="HyperLink9" NavigateUrl='<%#"#"+Eval("url") %>' data-toggle="tab" runat="server" Text='<%#Eval("classname") %>'></asp:HyperLink>
+                            </li>
+                        </ItemTemplate>
+                    </asp:ListView>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade in active" id="motion">
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                            SelectCommand="SELECT * FROM [grows] WHERE ([classid] = 1)">
+                            <SelectParameters>
+                                <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <ul class="conSerBoxUl">
+                            <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource3">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# "~/news.aspx?typeid=2&classid=1&growid="+Eval("growid")%>' runat="server">
+                                            <span><i class="icon1_<%= n1++ %>"></i></span>
+                                            <h3>
+                                                <%#Eval("growname") %>
+                                            </h3>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade in active" id="yoga">
+                        <asp:SqlDataSource ID="SqlDataSource4" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                            SelectCommand="SELECT * FROM [grows] WHERE ([classid] = 2)">
+                            <SelectParameters>
+                                <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <ul class="conSerBoxUl">
+                            <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource4">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# "~/news.aspx?typeid=2&classid=2&growid="+Eval("growid")%>' runat="server">
+                                            <span><i class="icon2_<%= n2++ %>"></i></span>
+                                            <h3>
+                                                <%#Eval("growname") %>
+                                            </h3>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade in active" id="sports">
+                        <asp:SqlDataSource ID="SqlDataSource5" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                            SelectCommand="SELECT * FROM [grows] WHERE ([classid] = 3)">
+                            <SelectParameters>
+                                <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <ul class="conSerBoxUl">
+                            <asp:ListView ID="ListView3" runat="server" DataSourceID="SqlDataSource5">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# "~/news.aspx?typeid=2&classid=3&growid="+Eval("growid")%>' runat="server">
+                                            <span><i class="icon3_<%= n3++ %>"></i></span>
+                                            <h3>
+                                                <%#Eval("growname") %>
+                                            </h3>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade in active" id="lose_weight">
+                        <asp:SqlDataSource ID="SqlDataSource6" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                            SelectCommand="SELECT * FROM [grows] WHERE ([classid] = 4)">
+                            <SelectParameters>
+                                <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <ul class="conSerBoxUl">
+                            <asp:ListView ID="ListView4" runat="server" DataSourceID="SqlDataSource6">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# "~/news.aspx?typeid=2&classid=4&growid="+Eval("growid")%>' runat="server">
+                                            <span><i class="icon4_<%= n4++ %>"></i></span>
+                                            <h3>
+                                                <%#Eval("growname") %>
+                                            </h3>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade in active" id="aerobic">
+                        <asp:SqlDataSource ID="SqlDataSource7" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                            SelectCommand="SELECT * FROM [grows] WHERE ([classid] = 5)">
+                            <SelectParameters>
+                                <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <ul class="conSerBoxUl">
+                            <asp:ListView ID="ListView5" runat="server" DataSourceID="SqlDataSource7">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# "~/news.aspx?typeid=2&classid=5&growid="+Eval("growid")%>' runat="server">
+                                            <span><i class="icon5_<%= n5++ %>"></i></span>
+                                            <h3>
+                                                <%#Eval("growname") %>
+                                            </h3>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade in active" id="fitness">
+                        <asp:SqlDataSource ID="SqlDataSource8" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>"
+                            SelectCommand="SELECT * FROM [grows] WHERE ([classid] = 6)">
+                            <SelectParameters>
+                                <asp:QueryStringParameter Name="classid" QueryStringField="classid" Type="Int32" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                        <ul class="conSerBoxUl">
+                            <asp:ListView ID="ListView6" runat="server" DataSourceID="SqlDataSource8">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:HyperLink ID="HyperLink9" NavigateUrl='<%# "~/news.aspx?typeid=2&classid=6&growid="+Eval("growid")%>' runat="server">
+                                            <span><i class="icon6_<%= n6++ %>"></i></span>
+                                            <h3>
+                                                <%#Eval("growname") %>
+                                            </h3>
+                                        </asp:HyperLink>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
+                </div>
+                <script>//显示链接过来的菜单
+                    $(function () {
+                        var str = location.href;
+                        var i,j, x, y, str2, str3;
+                        for (x = 1; x <= 6; x++) {
+                            for (y = 1; y <= 36; y++) {
+                                str2 = "classid=" + x;
+                                str3 = "growid=" + y;
+                                if (str.indexOf(str2) != -1) {
+                                    i = x - 1;
+                                    $("#myTab li:eq(" + i + ") a").tab('show');
+                                    $("#myTab li:eq(" + i + ")").addClass("serActive");
+                                }
+                                if (str.indexOf(str3) != -1) {
+                                    if (y <=10) {
+                                        j = y - 1;
+                                        $("#motion li:eq(" + j + ") span").addClass("bgBlue");
+                                    }
+                                    else if (y <= 13) {
+                                        j = y - 11;
+                                        $("#yoga li:eq(" + j + ") span").addClass("bgBlue");
+                                    }
+                                    else if (y <= 21) {
+                                        j = y - 14;
+                                        $("#sports li:eq(" + j + ") span").addClass("bgBlue");
+                                    }
+                                    else if (y <= 26) {
+                                        j = y - 22;
+                                        $("#lose_weight li:eq(" + j + ") span").addClass("bgBlue");
+                                    }
+                                    else if (y <= 33) {
+                                        j = y - 27;
+                                        $("#aerobic li:eq(" + j + ") span").addClass("bgBlue");
+                                    }
+                                    else if (y <= 36) {
+                                        j = y - 34;
+                                        $("#fitness li:eq(" + j + ") span").addClass("bgBlue");
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    //var ul = $('ul li');
+                    //ul.hover(function () {
+                    //    location.href = $(this).find('a')[0].href;
+                    //});
+                </script>
+            </div>
+        </div>
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+

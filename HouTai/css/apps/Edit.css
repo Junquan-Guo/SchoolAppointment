@@ -1,0 +1,55 @@
+﻿.d_Confirm_Order_style {
+ padding:0.5em;
+}
+.form-item {
+    margin: 2em 0;
+    clear: both;
+    vertical-align:central;
+}
+.form-label {
+    float: left;
+    display: block;
+    width: 120px;
+    font-weight: 400;
+    text-align: right;
+    line-height:38px;
+}
+.form-label-1 {
+    margin-left:2em;
+    font-weight: 400;
+}
+.form-input,.form-input-1,.form-input-2 {
+    
+    padding:6px;
+    border:1px solid #808080;
+    border-radius:0.4em;
+}
+.form-input{
+    width:80%;
+}
+.form-input-1{
+    width:30%;
+}
+.form-input-2 {
+    width: 15%;
+}
+
+.form-pic {
+    vertical-align: central;
+    display: inline-block;
+}
+
+.form-text {
+    width: 80%;
+    height: 15em;
+    border-radius:0.4em;
+    border:1px solid #808080;
+}
+
+input[type=file], .btn {
+    margin: 1em;
+}
+input:focus {
+    border:1px solid #ff6a00;
+}
+

@@ -1,0 +1,100 @@
+﻿.state-overview {
+    margin-top: 15px;
+}
+.state-overview .panel {
+    border: 1px solid #dddddd;
+}
+.panel {
+    border: 1px solid transparent;
+    border-radius: 0.25em;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.state-overview .terques { background: #6ccac9;}
+.state-overview .red { background: #ff6c60;}
+.state-overview .yellow { background: #f8d347;}
+.state-overview .blue {background: #57c8f2;}
+.state-overview .darkblue{ background-color:#438eb9}
+.state-overview .green{ background-color:#093}
+
+.state-overview .symbol {width: 40%;padding: 25px 15px; -webkit-border-radius: 4px 0px 0px 4px;border-radius: 4px 0px 0px 4px;}
+.state-overview .symbol i {color: #fff;font-size: 50px;}
+.state-overview .value {width: 58%;padding-top: 21px;}
+.state-overview .value {float: right;}
+.state-overview .value h1, .state-overview .value p {margin: 0;padding: 0;color: #666666;}
+.state-overview .value h1 {font-weight: 300;color:#ff6a00;}
+.state-overview .symbol, .state-overview .value {display: inline-block;text-align: center;}
+.state-overview .panel{border:1px solid #dddddd; background-color:#f2f2f2; margin-bottom:2em;}
+.symbol:hover a,.state-overview .symbol a:hover {
+    display: inline-block;
+    color:#f00;
+    transform: rotate(360deg);
+    transition: all 0.5s ease-in-out;
+}
+
+
+.home_btn{ border:1px solid #dddddd; padding:10px; margin:15px 0px;}
+.t_Record{ border:1px solid #ddd;  padding:10px; float:left}
+.news_style{ width:17.5em; float:left; border:1px solid #ddd;margin:0.5em 1.25em;  height:15.5em; }
+.Order_Statistics{ width:17.5em; float:left; border:1px solid #ddd; margin:0.5em 1.25em; height:15.5em;}
+
+.news_style .title_name,
+.Order_Statistics .title_name {padding-left:20px;
+	font-size:16px;
+	border-bottom:1px solid #dddddd;
+    background: #2a8bcc!important;
+    background-image: -webkit-gradient(linear,left 0,left 100%,from(#ffffff),to(#ededed))!important;
+    background-image: -webkit-linear-gradient(top,#ffffff,0%,#ededed,100%)!important;
+    background-image: -moz-linear-gradient(top,#ffffff 0,#ededed 100%)!important;
+    background-image: linear-gradient(to bottom,#ffffff 0,#ededed 100%)!important;
+    background-repeat: repeat-x!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#ededed',GradientType=0)!important;
+	height:36px; line-height:36px;
+	color:#333333;
+	width:100%	
+}
+.news_style .list{ padding:10px; line-height:26px;}
+.news_style .list li{list-style:none;}
+.news_style .list li i{ color:#F63; margin-right:5px;}
+.Statistics_style .Statistic_btn,
+.Order_form .Statistic_btn{ 
+	border:1px solid #dddddd; 
+	border-radius:3px;
+	font-size:14px;
+	text-align:center;
+	-moz-border-radius:3px; 
+	-webkit-border-radius:3px; 
+	float:right;
+	margin-right:100px;
+	height:30px;
+	margin-top:5px;
+	line-height:26px;
+	padding:0px 10px;
+	width:80px;
+	cursor:pointer;
+}
+.Statistics_style .Statistic_btn a,
+.Order_form .Statistic_btn a{ display:block;}
+.Statistics_style .top_show_btn,
+.Order_form .top_show_btn{ display:none}
+.Order_Statistics .title_name{ border-bottom:0px;}
+.grading_list .table_menu_list,
+.content_style{ padding:10px; }
+.grading_list .table_menu_list .table td{font-size:12px}
+.Order_Statistics .table tr{}
+.Order_Statistics .table.table-bordered{ border:0px }
+.Order_Statistics .table.table-bordered td.name{ border-left:0px; width:120px; text-align:right}
+.Order_Statistics .table.table-bordered td.munber{ border-right:0px;}
+.Order_Statistics .table.table-bordered td.munber a{ color:#F63}
+
+.btn-pink {
+    background-color:#b200ff;
+    color:#fff;
+}
+.glyphicon {
+    font-size:200%;
+}
+hr {
+    margin:0;
+}

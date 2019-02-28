@@ -1,0 +1,470 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ManageMasterPage.master.cs" Inherits="HouTai_ManageMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>校约健后台</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <link rel="shortcut icon" href="~/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css" media="screen" />
+    <link rel="stylesheet" href="css/style.default.css" />
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <%--字体样式--%>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet" />
+    <%-- 设置字体--%>
+    <style>
+        nav.navbar .menu-btn.active {
+            padding: 1em 0;
+        }
+
+        .d-flex {
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .navbar > .container, .navbar > .container-fluid {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: justify;
+        }
+
+        .nav-right {
+            position: absolute;
+            right: 1.8em;
+            top: 1.8em;
+        }
+
+        element.style {
+            height: 30px;
+            width: 30px;
+        }
+
+        .rounded-circle {
+            border-radius: 50%;
+            margin: -0.5em 0.2em;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        nav.navbar .dropdown-menu .msg-profile img {
+            display: flex; /*弹性布局*/
+            margin: 0.4em 0;
+        }
+
+        nav.navbar .dropdown-menu .msg-profile, nav.navbar .dropdown-menu .msg-body {
+            display: inline-block;
+        }
+
+        .search-box input {
+            height: 100%;
+            border: none;
+            padding: 30px;
+        }
+
+        nav.navbar .menu-btn {
+            padding-top: 1em;
+        }
+        .navbar {
+            margin-bottom: 0;
+        }
+
+    </style>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <header class="header">
+            <nav class="navbar navbar-expand-lg ">
+                <div class="search-box">
+                    <asp:Button ID="Button1" class="lense" runat="server" Text="搜索" OnClick="Button1_Click" />
+                    <button class="dismiss"><i class="fa fa-close"></i></button>
+                    <div id="searchForm" action="#" role="search">
+                        <asp:TextBox ID="TextBox1" placeholder="请输入搜索内容" cssClass="form-control"  runat="server"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="container-fluid ">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <div class="navbar-header">
+                            <a href="../Default.aspx" class="navbar-brand">
+                                <div class="brand-text brand-big hidden-lg-down">
+                                    <img src="images/logo-white.png" alt="Logo" class="img-fluid" />
+                                </div>
+                                <div class="brand-text brand-small">
+                                    <img src="images/logo-icon.png" alt="Logo" class="img-fluid" />
+                                </div>
+                            </a>
+                            <a id="toggle-btn" href="#" class="menu-btn active">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center nav-right">
+                        <!-- Expand-->
+                        <li class="nav-item d-flex align-items-center full_scr_exp">
+                            <a class="nav-link" href="#">
+                                <img class="img-fluid" src="images/expand.png" onclick="toggleFullScreen(document.body)" />
+                            </a></li>
+                        <!-- Search-->
+                        <li class="nav-item d-flex align-items-center"><a id="search" class="nav-link" href="#"><i class="fa fa-search"></i></a></li>
+                        <!-- Notifications-->
+                        <li class="nav-item dropdown">
+                            <a id="notifications" class="nav-link" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="noti-numb-bg"></span><span class="badge">12</span></a>
+                            <ul aria-labelledby="notifications" class="dropdown-menu">
+                                <li>
+                                    <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>您登录了校约健</div>
+                                            <div class="notification-time"><small>11分钟前</small></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-envelope bg-red"></i>你有6条新消息 </div>
+                                            <div class="notification-time"><small>5分钟前</small></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-twitter bg-skyblue"></i>
+                                                <asp:Label ID="Label3" runat="server" Text="新增了2名会员"></asp:Label></div>
+                                            <div class="notification-time"><small>10分钟前</small></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#" class="dropdown-item nav-link">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-upload bg-blue"></i>网站公告</div>
+                                            <div class="notification-time"><small>11分钟前</small></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"><strong>查看所有通知</strong></a></li>
+                            </ul>
+                        </li>
+                        <!-- Messages-->
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Fitness312ConnectionString %>" 
+                            SelectCommand="SELECT top 3 f.*, u.[picture],u.[username]
+                            FROM [dbo].[feedback] f 
+                            INNER JOIN [dbo].[users] u
+                                ON f.[userid] = u.[userid]
+                            ORDER BY f.[publishdate] DESC"></asp:SqlDataSource>
+                        <li class="nav-item dropdown">
+                            <a id="messages" class="nav-link logout" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-envelope-o"></i><span class="noti-numb-bg"></span><span class="badge">10</span></a>
+                            <ul aria-labelledby="messages" class="dropdown-menu">
+                                <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                                <div class="msg-profile">
+                                                    <asp:Image ID="Image1" ImageUrl='<%# Eval("picture") %>' runat="server" CssClass="img-fluid rounded-circle" />
+                                                </div>
+                                                <div class="msg-body">
+                                                    <h3 class="h5 msg-nav-h3">
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("username") %>'></asp:Label>
+                                                    </h3>
+                                                    <span>给你留言</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:ListView>
+                                <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"><strong>查看更多消息  </strong></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="profile" class="nav-link logout" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <asp:Image ID="picture" cssClass="img-fluid rounded-circle" runat="server" ImageUrl="images/face.jpg" style="height: 30px; width: 30px;" />
+                            </a>
+                            <ul aria-labelledby="profile" class="dropdown-menu profile">
+                                <li>
+                                    <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                        <div class="msg-profile">
+                                            <asp:Image ID="picture1" cssClass="img-fluid rounded-circle" runat="server" ImageUrl="images/face.jpg" />
+                                        </div>
+                                        <div class="msg-body">
+                                            <h3 class="h5">
+                                                <asp:Label ID="managename1" runat="server" Text="16303112"></asp:Label>
+                                            </h3>
+                                            <asp:Label ID="email" runat="server" Text="admin@Manage.com"></asp:Label>
+                                        </div>
+                                    </a>
+                                    <hr/>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="dropdown-item">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-tasks"></i>我的主页</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  href="javascript:void(0)" class="dropdown-item" >
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-newspaper-o"></i>编辑消息</div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  href="javascript:void(0)" class="dropdown-item">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-edit"></i>修改密码</div>
+                                        </div>
+                                    </a>
+                                    <hr/>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="login.aspx" class="dropdown-item">
+                                        <div class="notification">
+                                            <div class="notification-content"><i class="fa fa-power-off"></i>退出</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item d-flex align-items-center"><a id="menu-toggle-right" class="nav-link" href="#"><i class="fa fa-bars"></i></a></li>
+                        <nav id="sidebar-wrapper">
+                            <div class="sidebar-nav">
+                                <div class="tab" role="tabpanel">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item ">
+                                            <a class="nav-link active" href="#live" role="tab" data-toggle="tab"><i class="fa fa-globe"></i>新闻推送</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content tabs">
+                                        <div role="tabpanel" class="tab-pane fade show active" id="live">
+                                            <h3>为您推送最好的!</h3>
+                                            <div class="content newsf-list">
+                                                <ul class="list-unstyled">
+                                                    <li class="border border-primary">
+                                                        <a rel="nofollow " href="#" class=" d-flex">
+                                                            <div class="news-f-img">
+                                                                <img src="images/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"/>
+                                                            </div>
+                                                            <div class="msg-body">
+                                                                <h6 class="h5 msg-nav-h6">微信新闻</h6>
+                                                                <small>大学生不能弥漫对权力的...</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="border border-success">
+                                                        <a rel="nofollow" href="#" class=" d-flex">
+                                                            <div class="news-f-img">
+                                                                <img src="images/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"/>
+                                                            </div>
+                                                            <div class="msg-body">
+                                                                <h6 class="h5 msg-nav-h6">头条新闻</h6>
+                                                                <small>中国大学改名的套路...</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="border border-info">
+                                                        <a rel="nofollow" href="#" class=" d-flex">
+                                                            <div class="news-f-img">
+                                                                <img src="images/avatar-4.jpg" alt="..." class="img-fluid rounded-circle"/>
+                                                            </div>
+                                                            <div class="msg-body">
+                                                                <h6 class="h5 msg-nav-h6">凤凰新闻</h6>
+                                                                <small>这届大学生如何消费...</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="border border-primary">
+                                                        <a rel="nofollow" href="#" class=" d-flex">
+                                                            <div class="news-f-img">
+                                                                <img src="images/avatar-1.jpg" alt="..." class="img-fluid rounded-circle"/>
+                                                            </div>
+                                                            <div class="msg-body">
+                                                                <h6 class="h5 msg-nav-h6">知乎新闻</h6>
+                                                                <small>广东工贸职业技术学院...</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="border border-success">
+                                                        <a rel="nofollow" href="#" class=" d-flex">
+                                                            <div class="news-f-img">
+                                                                <img src="images/avatar-2.jpg" alt="..." class="img-fluid rounded-circle"/>
+                                                            </div>
+                                                            <div class="msg-body">
+                                                                <h6 class="h5 msg-nav-h6">微信新闻</h6>
+                                                                <small>16软件3班...</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="border border-info">
+                                                        <a rel="nofollow" href="#" class=" d-flex">
+                                                            <div class="news-f-img">
+                                                                <img src="images/avatar-3.jpg" alt="..." class="img-fluid rounded-circle"/>
+                                                            </div>
+                                                            <div class="msg-body">
+                                                                <h6 class="h5 msg-nav-h6">知乎新闻</h6>
+                                                                <small>嘀嘀嘀...</small>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!--====================================================
+                        PAGE CONTENT
+         ======================================================-->
+        <div class="page-content d-flex align-items-stretch">
+
+            <!--***** SIDE NAVBAR *****-->
+            <nav class="side-navbar">
+                <div class="sidebar-header d-flex align-items-center">
+                    <div class="avatar">
+                        <asp:Image ID="picture2" cssClass="img-fluid rounded-circle" ImageUrl="images/face.jpg" runat="server" />
+                    </div>
+                    <div class="title">
+                        <h1 class="h4">
+                            <asp:Label ID="UserName" runat="server" Text="1630312"></asp:Label>
+                        </h1>
+                    </div>
+                </div>
+                <hr>
+                <!-- Sidebar Navidation Menus-->
+                <ul class="list-unstyled">
+                    <li class="active"><a href="ManageDefault.aspx"><i class="fa fa-home"></i>首页</a></li>
+                    <li><a href="Inform.aspx"><i class="fa fa-comments-o"></i>通知</a>
+                    </li>
+                    <li><a href="#pages" aria-expanded="false" data-toggle="collapse"><i class="fa fa-file-word-o"></i>图文 </a>
+                        <ul id="pages" class="collapse list-unstyled">
+                            <li><a href="NewsList.aspx">图文列表</a></li>
+                            <li><a href="NewsAdd.aspx">添加图文</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#forms" aria-expanded="false" data-toggle="collapse"><i class="fa fa-file-video-o"></i>视频 </a>
+                        <ul id="forms" class="collapse list-unstyled">
+                            <li><a href="#">视频列表</a></li>
+                            <li><a href="#">添加视频</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#user" aria-expanded="false" data-toggle="collapse"><i class="fa fa-user-plus"></i>用户管理 </a>
+                        <ul id="user" class="collapse list-unstyled">
+                            <li><a href="UserList.aspx">用户列表</a></li>
+                            <li><a href="ManageList.aspx">管理员列表</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#material" aria-expanded="false" data-toggle="collapse"><i class="fa fa-folder-open"></i>素材管理 </a> 
+                          <ul id="material" class="collapse list-unstyled">
+                            <li><a href="Images.aspx">图片素材</a></li>
+                            <li><a href="#">视频素材</a></li>
+                        </ul>                
+                    </li>
+                    <li><a href="javascript:void(0)"><i class="fa fa-cog"></i>设置 </a>
+                    </li>
+                </ul>
+                <span class="heading">附加功能</span>
+                <ul class="list-unstyled">
+                    <li><a href="#function" aria-expanded="false" data-toggle="collapse"><i class="fa fa-wrench"></i>功能</a>
+                        <ul id="function" class="collapse list-unstyled">
+                            <li><a href="404.aspx">404</a></li>
+                            <li><a href="login.aspx">管理员登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content-inner">
+                <div class="home-box">
+                    <div class="home_list">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <nav class="navbar navbar-expand-lg ">
+                <div class="row">
+                    <div style="text-align:center;padding:0 1em;">
+                        <p>
+                            Copyright © 2018 校约健 www.xiaoyuejian.com, All rights reserved. 粤ICP备1630312
+                        </p>
+                        <p>
+                            本站除标明"本站原创"外所有照片版权归创作人所有，如有冒犯，请直接联系本站，我们将立即予以纠正并致歉！
+                        </p>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+        <script type="text/javascript" src="js/popper.js"></script>
+        <%--消息框--%>
+        <script type="text/javascript" src="js/front.js"></script>
+        <%--全屏--%>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <%--左右划出--%>
+        <script type="text/javascript">
+            $('#toggle-btn').on('click', function (e) {
+                e.preventDefault();
+                $(this).toggleClass('active');
+
+                $('.side-navbar').toggleClass('shrinked');
+                $('.content-inner').toggleClass('active');
+
+                if ($(window).outerWidth() > 1183) {
+                    if ($('#toggle-btn').hasClass('active')) {
+                        $('.navbar-header .brand-small').hide();
+                        $('.navbar-header .brand-big').show();
+                    } else {
+                        $('.navbar-header .brand-small').show();
+                        $('.navbar-header .brand-big').hide();
+                    }
+                }
+
+                if ($(window).outerWidth() < 1183) {
+                    $('.navbar-header .brand-small').show();
+                }
+            });
+            // ------------------------------------------------------- //
+            // Right side navbar
+            // ------------------------------------------------------ //
+            $("#menu-close").click(function (e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("active");
+            });
+            $("#menu-toggle-right").click(function (e) {
+                e.preventDefault();
+                $("#sidebar-wrapper").toggleClass("active");
+            });
+            $('#search').on('click', function (e) {
+                e.preventDefault();
+                $('.search-box').fadeIn();
+            });
+            $('.dismiss').on('click', function () {
+                $('.search-box').fadeOut();
+            });
+        </script>
+    </form>
+</body>
+</html>
