@@ -12,9 +12,9 @@
     ---------------------------------------------------------------------------------
     
      # 演示
- <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql1.png" height="400"/> 
-<img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql2.png" height="400"/> 
-<img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql3.png" height="400"/> 
+ <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql1.PNG" height="400"/> 
+<img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql2.PNG" height="400"/> 
+<img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql3.PNG" height="400"/> 
 <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/ht01.png" height="400"/> 
 <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/ht02.png" height="400"/> 
 <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/ht03.png" height="400"/> 
