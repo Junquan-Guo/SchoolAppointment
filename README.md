@@ -7,10 +7,14 @@
     3、后台主要功能是管理员登录、编辑、添加、删除文章，管理用户等。
     搭建环境：Windows+Visual Studio 2012+SQL+JetBrains WebStorm等。
     开发技术：ASP.NET、HTML5、CSS3、JavaScript、jQuery、Ajax、MySQL、Bootstrap等
+    4、用户账号：admin1  密码：aaa111
+    5、管理员账号：admin 密码：12345678
     ---------------------------------------------------------------------------------
     
      # 演示
-     
+ <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql1.png" height="400"/> 
+<img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql2.png" height="400"/> 
+<img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/sql3.png" height="400"/> 
 <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/ht01.png" height="400"/> 
 <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/ht02.png" height="400"/> 
 <img src="https://github.com/Junquan-Guo/SchoolAppointment/blob/master/demonstration/ht03.png" height="400"/> 
