@@ -8,7 +8,13 @@
     搭建环境：Windows+Visual Studio 2012+SQL+JetBrains WebStorm等。
     开发技术：ASP.NET、HTML5、CSS3、JavaScript、jQuery、Ajax、MySQL、Bootstrap等
     4、用户账号：admin1  密码：aaa111
-    5、管理员账号：admin 密码：12345678
+    用户账号：admin2  密码：aaa222
+    ...
+    5、管理员账号：admin 密码：admin001
+    管理员账号：admin0 密码：admin00
+    http://120.79.230.50/
+    # 后台登陆界面
+    ## http://120.79.230.50/HouTai/login.aspx
     ---------------------------------------------------------------------------------
     
      # 演示
