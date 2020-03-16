@@ -10,7 +10,7 @@
     用户账号：admin2  密码：aaa222
     ...
     5、管理员账号：admin 密码：admin001
-    管理员账号：admin0 密码：admin00
+    管理员账号：admin0 密码：admin00 
     [校约健](http://120.79.230.50:85 "校约健")
     [后台登陆界面](http://120.79.230.50:85/HouTai/login.aspx "后台登陆界面")
 
